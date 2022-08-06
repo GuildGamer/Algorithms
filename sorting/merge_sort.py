@@ -1,64 +1,73 @@
 import math
 
 def sort(array: list):
-    # if the length of the array is 1, return array
-    if len(array) == 1:
-        return array
+    try:
+        # if the length of the array is 1, return array
+        if len(array) == 1:
+            return array
 
-    else:
-        # get the length of the first half of the array
-        length = len(array)
-        n1 = int(length/2) + (length % 2 > 0)
+        else:
+            # get the length of the first half of the array
+            length = len(array)
+            n1 = int(length/2) + (length % 2 > 0)
 
-        print(n1)
-        
-        L = []
-        R = []
-
-        # divide the array intp 2
-        for i in range(n1):
-            L.append(array[i])
-            j = i + 1
-        
-        for i in range(j, length):
-            R.append(array[i])
-
-        #sort recuesively if the length of the array is greater than 2
-        if len(array) > 2:
-            L = sort(L)
-            R = sort(R)
-
-        i = 0
-        j = 0
-
-        # new list to hold sorted array i.e A[p..k-1]
-        n_list  = []
-
-        for k in range(len(array)):
+            print(n1)
             
-            if L[i] <= R[j]:
-                n_list.append(L[i])
+            L = []
+            R = []
 
-                # makes sure the last added element to the sorted array is ignored in... 
-                # ...the next comparison iteration
-                L[i] = math.inf
+            # divide the array intp 2
+            for i in range(n1):
+                L.append(array[i])
+                j = i + 1
+            
+            for i in range(j, length):
+                R.append(array[i])
 
-                # prevents loop from calling array element out of range
-                if (i + 1) < len(L):
-                    i += 1
+            #sort recuesively if the length of the array is greater than 2
+            if len(array) > 2:
+                L = sort(L)
+                R = sort(R)
 
-            else:
-                n_list.append(R[j])
-                R[j] = math.inf
+            i = 0
+            j = 0
 
-                if (j + 1) < len(R):
-                    j += 1
+            # new list to hold sorted array i.e A[p..k-1]
+            n_list  = []
 
-        print(n_list)
-        return n_list
+            for k in range(len(array)):
+                
+                if L[i] <= R[j]:
+                    n_list.append(L[i])
 
+                    # makes sure the last added element to the sorted array is ignored in... 
+                    # ...the next comparison iteration
+                    L[i] = math.inf
+
+                    # prevents loop from calling array element out of range
+                    if (i + 1) < len(L):
+                        i += 1
+
+                else:
+                    n_list.append(R[j])
+                    R[j] = math.inf
+
+                    if (j + 1) < len(R):
+                        j += 1
+
+            return n_list
+
+    except TypeError:
+        return "Strings are not allowed. Only numbers."
 
 if __name__ == "__main__":
-    arr = eval(input("Array to sort: "))
+    try:
+        arr = eval(input("Array to sort: "))
+        sorted = sort(arr)
+        print(sorted)
 
-    sorted = sort(arr)
+    except NameError:
+        print ("Error! Strings are not allowed. Only numbers.")
+
+    except SyntaxError:
+        print ("Error! Array typed wrongly. Please check and try again.")
