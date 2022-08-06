@@ -1,2 +1,2 @@
 # Algorithms
-Github repository for implementing the algorithms from the book: Introduction to Algorithms(Third Edition)
+Github repository for implementing the algorithms from the book: [Introduction to Algorithms(Third Edition)](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)
